@@ -56,24 +56,24 @@ const businessIcons = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden pt-24 sm:pt-34 lg:pt-40">
-        <div className="container-snow grid min-h-[calc(100svh-4rem)] items-center gap-6 pb-10 sm:gap-8 sm:pb-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
+      <section className="relative overflow-hidden pt-24 sm:pt-32 lg:pt-40">
+        <div className="container-snow grid min-h-[calc(100svh-4rem)] items-center gap-8 pb-12 sm:gap-10 sm:pb-16 lg:grid-cols-[0.96fr_1.04fr] lg:gap-14">
           <div>
             <Reveal>
               <p className="mb-4 inline-flex rounded-full border border-snow-border bg-white/[0.06] px-3 py-1.5 text-[0.66rem] font-bold uppercase text-snow-lilac sm:mb-5 sm:px-4 sm:py-2 sm:text-sm">
                 Snow Agência de Crescimento em São José dos Pinhais
               </p>
-              <h1 className="max-w-[21rem] text-balance text-[2.35rem] font-black leading-[1.02] text-white sm:max-w-4xl sm:text-5xl lg:text-[4.25rem]">
-                <span className="sm:hidden">Marketing com estratégia para negócios locais crescerem.</span>
-                <span className="hidden sm:inline">Estratégia, conteúdo e tráfego pago para negócios locais que querem crescer com presença digital profissional.</span>
+              <h1 className="max-w-[19rem] text-balance text-[2.65rem] font-black leading-[0.98] text-white sm:max-w-3xl sm:text-6xl lg:text-[4.9rem]">
+                <span className="sm:hidden">Precisa vender mais?</span>
+                <span className="hidden sm:inline">Seu negócio local precisa vender mais?</span>
               </h1>
-              <p className="mt-4 max-w-[20rem] text-pretty text-[0.92rem] leading-6 text-snow-muted sm:mt-6 sm:max-w-xl sm:text-lg sm:leading-8">
-                <span className="sm:hidden">Presença digital profissional para atrair clientes, gerar conversas e vender mais.</span>
-                <span className="hidden sm:inline">Ajudamos negócios locais a transformarem presença digital em autoridade, relacionamento e oportunidades reais de venda.</span>
+              <p className="mt-6 max-w-[20rem] text-pretty text-[0.95rem] leading-7 text-snow-muted sm:mt-8 sm:max-w-xl sm:text-lg sm:leading-8">
+                <span className="sm:hidden">Estratégia, conteúdo e tráfego pago para gerar oportunidades reais de venda.</span>
+                <span className="hidden sm:inline">Unimos estratégia, conteúdo e tráfego pago para transformar presença digital em oportunidades reais de venda.</span>
               </p>
             </Reveal>
 
-            <Reveal delay={0.14} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
+            <Reveal delay={0.14} className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4">
               <Button href={WHATSAPP_URL} size="lg" showArrow>
                 Quero crescer com a Snow
               </Button>
@@ -82,11 +82,11 @@ export default function Home() {
               </Button>
             </Reveal>
 
-            <Reveal delay={0.26} className="mt-6 flex max-w-xl flex-wrap gap-2 sm:mt-8 sm:gap-3">
+            <Reveal delay={0.26} className="mt-7 flex max-w-xl flex-wrap gap-2 sm:mt-9 sm:gap-3">
               {authorityPills.map((pill, index) => (
                 <span
                   key={pill}
-                  className={`${index > 2 ? "hidden sm:inline-flex" : "inline-flex"} rounded-full border border-snow-border bg-white/[0.06] px-3 py-1.5 text-[0.72rem] font-semibold text-snow-muted backdrop-blur-xl sm:px-3.5 sm:py-2 sm:text-sm`}
+                  className={`${index > 1 ? "hidden sm:inline-flex" : "inline-flex"} rounded-full border border-snow-border bg-white/[0.06] px-3 py-1.5 text-[0.72rem] font-semibold text-snow-muted backdrop-blur-xl sm:px-3.5 sm:py-2 sm:text-sm`}
                 >
                   {pill}
                 </span>

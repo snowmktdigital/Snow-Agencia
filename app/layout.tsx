@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { BackgroundEffects } from "@/components/BackgroundEffects";
 import { Footer } from "@/components/Footer";
+import { GlobalCursorEffect } from "@/components/GlobalCursorEffect";
 import { Header } from "@/components/Header";
 import { ParticleSnowBackground } from "@/components/ParticleSnowBackground";
 import { SnowLoader } from "@/components/SnowLoader";
@@ -73,6 +74,7 @@ export default function RootLayout({
       <body className="aurora-field antialiased">
         <BackgroundEffects />
         <ParticleSnowBackground />
+        <GlobalCursorEffect />
         <SnowLoader />
         <div className="relative z-10">
           <Header />
