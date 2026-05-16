@@ -26,7 +26,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="mt-5 max-w-md text-sm leading-7 text-snow-muted">
-            Estratégia, conteúdo e tráfego pago para negócios locais que querem crescer com presença digital profissional.
+            Estratégia, conteúdo e tráfego pago.
           </p>
         </div>
 

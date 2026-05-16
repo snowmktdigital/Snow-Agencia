@@ -63,7 +63,7 @@ export default function Home() {
                 Snow Agência de Crescimento em São José dos Pinhais
               </p>
               <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-                Estratégia, conteúdo e tráfego pago para negócios locais que querem crescer com presença digital profissional.
+                Estratégia, conteúdo e tráfego pago.
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-snow-muted sm:text-lg">
                 A Snow Agência de Crescimento ajuda academias, restaurantes, óticas, hamburguerias, lojas e prestadores de serviço a transformarem presença digital em autoridade, relacionamento e oportunidades reais de venda.
