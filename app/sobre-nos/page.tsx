@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BarChart3, Compass, Film, Handshake, MapPinned, Rocket } from "lucide-react";
+import { AnimatedCard } from "@/components/AnimatedCard";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
 import { SectionTitle } from "@/components/SectionTitle";
@@ -61,14 +62,14 @@ export default function SobreNosPage() {
             description="A Snow Agência de Crescimento nasceu com o objetivo de ajudar comércios locais a saírem do marketing improvisado e construírem uma presença digital mais profissional, estratégica e preparada para gerar oportunidades reais."
           />
           <Reveal delay={0.1}>
-            <div className="glass-panel rounded-lg p-6 sm:p-8">
+            <AnimatedCard className="p-6 sm:p-8" delay={0.05}>
               <p className="text-lg font-bold leading-8 text-white">
                 Trabalhamos para empresários que querem parar de depender de postagens aleatórias e começar a construir uma comunicação que sustenta crescimento.
               </p>
               <p className="mt-5 text-base leading-8 text-snow-muted">
                 A Snow une estratégia, conteúdo, tráfego pago e leitura local para posicionar marcas com mais autoridade diante da concorrência e mais clareza para vender.
               </p>
-            </div>
+            </AnimatedCard>
           </Reveal>
         </div>
       </section>
@@ -78,13 +79,11 @@ export default function SobreNosPage() {
           {pillars.map((pillar, index) => {
             const Icon = pillar.icon;
             return (
-              <Reveal key={pillar.title} delay={index * 0.06}>
-                <article className="glass-panel h-full rounded-lg p-7">
-                  <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac" />
-                  <h2 className="mt-6 text-2xl font-black text-white">{pillar.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-snow-muted">{pillar.text}</p>
-                </article>
-              </Reveal>
+              <AnimatedCard key={pillar.title} delay={index * 0.06} className="h-full p-7">
+                <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
+                <h2 className="mt-6 text-2xl font-black text-white">{pillar.title}</h2>
+                <p className="mt-4 text-sm leading-7 text-snow-muted">{pillar.text}</p>
+              </AnimatedCard>
             );
           })}
         </div>
@@ -100,12 +99,10 @@ export default function SobreNosPage() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {differentials.map((item, index) => (
-            <Reveal key={item} delay={index * 0.04}>
-              <article className="rounded-lg border border-snow-border bg-white/[0.05] p-6">
-                <span className="text-sm font-black text-snow-lilac">0{index + 1}</span>
-                <h3 className="mt-4 text-lg font-black text-white">{item}</h3>
-              </article>
-            </Reveal>
+            <AnimatedCard key={item} delay={index * 0.045} className="p-6">
+              <span className="text-sm font-black text-snow-lilac">0{index + 1}</span>
+              <h3 className="mt-4 text-lg font-black text-white">{item}</h3>
+            </AnimatedCard>
           ))}
         </div>
       </section>
@@ -115,13 +112,11 @@ export default function SobreNosPage() {
           {proofCards.map((card, index) => {
             const Icon = card.icon;
             return (
-              <Reveal key={card.title} delay={index * 0.06}>
-                <article className="glass-panel h-full rounded-lg p-7">
-                  <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac" />
-                  <h2 className="mt-6 text-xl font-black text-white">{card.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-snow-muted">{card.text}</p>
-                </article>
-              </Reveal>
+              <AnimatedCard key={card.title} delay={index * 0.06} className="h-full p-7">
+                <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
+                <h2 className="mt-6 text-xl font-black text-white">{card.title}</h2>
+                <p className="mt-4 text-sm leading-7 text-snow-muted">{card.text}</p>
+              </AnimatedCard>
             );
           })}
         </div>

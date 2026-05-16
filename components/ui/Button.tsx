@@ -37,7 +37,7 @@ export function Button({
 }: ButtonProps) {
   const isExternal = href.startsWith("http");
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full border font-semibold transition duration-300",
+    "group inline-flex items-center justify-center gap-2 rounded-full border font-semibold transition duration-300 hover:scale-[1.025] active:scale-[0.985]",
     sizes[size],
     variants[variant],
     className
@@ -46,7 +46,12 @@ export function Button({
   const content = (
     <>
       {children}
-      {showArrow ? <ArrowRight aria-hidden="true" className="h-4 w-4" /> : null}
+      {showArrow ? (
+        <ArrowRight
+          aria-hidden="true"
+          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+        />
+      ) : null}
     </>
   );
 

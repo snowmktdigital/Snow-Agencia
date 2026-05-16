@@ -3,6 +3,8 @@ import "./globals.css";
 import { BackgroundEffects } from "@/components/BackgroundEffects";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ParticleSnowBackground } from "@/components/ParticleSnowBackground";
+import { SnowLoader } from "@/components/SnowLoader";
 
 const title =
   "Snow Agência de Crescimento | Marketing Digital para Negócios Locais";
@@ -70,9 +72,13 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="aurora-field antialiased">
         <BackgroundEffects />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <ParticleSnowBackground />
+        <SnowLoader />
+        <div className="relative z-10">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ export function CTASection({
   return (
     <section className="container-snow py-20">
       <Reveal>
-        <div className="glass-panel relative overflow-hidden rounded-lg p-8 sm:p-10 lg:p-14">
+        <div className="glass-panel relative overflow-hidden rounded-lg p-8 transition duration-300 hover:border-snow-lilac/60 sm:p-10 lg:p-14">
           <div className="absolute inset-0 snow-grid opacity-20" aria-hidden="true" />
           <div className="absolute right-0 top-0 h-px w-3/5 bg-gradient-to-r from-transparent via-snow-lilac/80 to-transparent" aria-hidden="true" />
           <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">

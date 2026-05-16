@@ -84,7 +84,7 @@ export default function ContatoPage() {
                 const Icon = item.icon;
                 const content = (
                   <>
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-snow-border bg-snow-purple/20 text-snow-lilac">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-snow-border bg-snow-purple/20 text-snow-lilac transition duration-300 group-hover:scale-110 group-hover:border-snow-lilac/70">
                       <Icon aria-hidden="true" className="h-5 w-5" />
                     </span>
                     <span>
@@ -101,7 +101,7 @@ export default function ContatoPage() {
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                      className="flex items-center gap-4 py-4 transition hover:text-snow-lilac"
+                      className="group flex items-center gap-4 py-4 transition hover:text-snow-lilac"
                     >
                       {content}
                     </a>
@@ -109,7 +109,7 @@ export default function ContatoPage() {
                 }
 
                 return (
-                  <div key={item.label} className="flex items-center gap-4 py-4">
+                  <div key={item.label} className="group flex items-center gap-4 py-4">
                     {content}
                   </div>
                 );

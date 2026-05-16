@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import { interestOptions } from "@/data/site";
 
@@ -22,7 +23,7 @@ export function ContactForm() {
 
     setSubmitState({
       status: "loading",
-      message: "Enviando sua mensagem para a Snow..."
+      message: "Enviando sua mensagem..."
     });
 
     try {
@@ -36,13 +37,13 @@ export function ContactForm() {
       const data = (await response.json()) as { message?: string };
 
       if (!response.ok) {
-        throw new Error(data.message ?? "Não foi possível enviar a mensagem.");
+        throw new Error(data.message ?? "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp.");
       }
 
       setSubmitState({
         status: "success",
         message:
-          data.message ?? "Mensagem enviada. Em breve a Snow entra em contato."
+          data.message ?? "Mensagem enviada com sucesso! Em breve nossa equipe vai entrar em contato."
       });
       form.reset();
     } catch (error) {
@@ -51,7 +52,7 @@ export function ContactForm() {
         message:
           error instanceof Error
             ? error.message
-            : "Não foi possível enviar a mensagem agora."
+            : "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp."
       });
     }
   }
@@ -108,14 +109,16 @@ export function ContactForm() {
       </div>
 
       <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
-        <button
+        <motion.button
           type="submit"
           disabled={submitState.status === "loading"}
           className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-snow-gradient px-6 text-base font-bold text-white shadow-glow transition duration-300 hover:shadow-[0_0_48px_rgba(184,140,255,0.46)] disabled:cursor-not-allowed disabled:opacity-60"
+          whileHover={{ scale: 1.025 }}
+          whileTap={{ scale: 0.985 }}
         >
           <Send aria-hidden="true" className="h-5 w-5" />
           {submitState.status === "loading" ? "Enviando..." : "Enviar mensagem"}
-        </button>
+        </motion.button>
 
         <p
           className="text-sm leading-6 text-snow-muted"

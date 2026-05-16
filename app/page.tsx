@@ -13,6 +13,7 @@ import {
   Utensils,
   Zap
 } from "lucide-react";
+import { AnimatedCard } from "@/components/AnimatedCard";
 import { CTASection } from "@/components/CTASection";
 import { ClientCard } from "@/components/ClientCard";
 import { HeroVisual } from "@/components/HeroVisual";
@@ -55,18 +56,18 @@ const businessIcons = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden pt-32 sm:pt-36 lg:pt-40">
-        <div className="container-snow grid min-h-[calc(100vh-5rem)] items-center gap-12 pb-16 lg:grid-cols-[1.02fr_0.98fr]">
+      <section className="relative overflow-hidden pt-28 sm:pt-34 lg:pt-40">
+        <div className="container-snow grid min-h-[calc(100vh-5rem)] items-center gap-8 pb-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
           <div>
             <Reveal>
-              <p className="mb-5 inline-flex rounded-full border border-snow-border bg-white/[0.06] px-4 py-2 text-sm font-bold text-snow-lilac">
+              <p className="mb-5 inline-flex rounded-full border border-snow-border bg-white/[0.06] px-4 py-2 text-xs font-bold uppercase text-snow-lilac sm:text-sm">
                 Snow Agência de Crescimento em São José dos Pinhais
               </p>
-              <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-                Estratégia, conteúdo e tráfego pago.
+              <h1 className="max-w-4xl text-balance text-4xl font-black leading-[1.04] text-white sm:text-5xl lg:text-[4.25rem]">
+                Estratégia, conteúdo e tráfego pago para negócios locais que querem crescer com presença digital profissional.
               </h1>
-              <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-snow-muted sm:text-lg">
-                A Snow Agência de Crescimento ajuda academias, restaurantes, óticas, hamburguerias, lojas e prestadores de serviço a transformarem presença digital em autoridade, relacionamento e oportunidades reais de venda.
+              <p className="mt-6 max-w-xl text-pretty text-[0.98rem] leading-7 text-snow-muted sm:text-lg sm:leading-8">
+                Ajudamos negócios locais a transformarem presença digital em autoridade, relacionamento e oportunidades reais de venda.
               </p>
             </Reveal>
 
@@ -79,11 +80,11 @@ export default function Home() {
               </Button>
             </Reveal>
 
-            <Reveal delay={0.18} className="mt-8 flex flex-wrap gap-3">
+            <Reveal delay={0.18} className="mt-8 flex max-w-xl flex-wrap gap-2.5 sm:gap-3">
               {authorityPills.map((pill) => (
                 <span
                   key={pill}
-                  className="rounded-full border border-snow-border bg-white/[0.06] px-4 py-2 text-sm font-semibold text-snow-muted"
+                  className="rounded-full border border-snow-border bg-white/[0.06] px-3.5 py-2 text-xs font-semibold text-snow-muted backdrop-blur-xl sm:text-sm"
                 >
                   {pill}
                 </span>
@@ -107,12 +108,10 @@ export default function Home() {
             {painPoints.map((pain, index) => {
               const Icon = painIcons[index];
               return (
-                <Reveal key={pain} delay={index * 0.04}>
-                  <article className="glass-panel rounded-lg p-5">
-                    <Icon aria-hidden="true" className="h-5 w-5 text-snow-lilac" />
-                    <h3 className="mt-4 text-base font-black text-white">{pain}</h3>
-                  </article>
-                </Reveal>
+                <AnimatedCard key={pain} delay={index * 0.055} className="h-full p-5">
+                  <Icon aria-hidden="true" className="h-5 w-5 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
+                  <h3 className="mt-4 text-base font-black text-white">{pain}</h3>
+                </AnimatedCard>
               );
             })}
           </div>
@@ -133,7 +132,7 @@ export default function Home() {
               title={service.title}
               description={service.description}
               icon={service.icon}
-              delay={index * 0.05}
+              delay={index * 0.055}
             />
           ))}
         </div>
@@ -151,14 +150,14 @@ export default function Home() {
             {businessTypes.map((type, index) => {
               const Icon = businessIcons[index];
               return (
-                <Reveal key={type} delay={index * 0.04}>
-                  <article className="flex items-center gap-4 rounded-lg border border-snow-border bg-white/[0.05] p-5">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-snow-purple/20 text-snow-lilac">
+                <AnimatedCard key={type} delay={index * 0.045} className="p-5">
+                  <div className="flex items-center gap-4">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-snow-purple/20 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3">
                       <Icon aria-hidden="true" className="h-5 w-5" />
                     </span>
                     <h3 className="font-bold text-white">{type}</h3>
-                  </article>
-                </Reveal>
+                  </div>
+                </AnimatedCard>
               );
             })}
           </div>
@@ -173,13 +172,13 @@ export default function Home() {
         />
         <div className="mt-12 grid gap-5 lg:grid-cols-5">
           {snowMethod.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.05}>
-              <article className="glass-panel h-full rounded-lg p-6">
-                <span className="text-sm font-black text-snow-lilac">{item.step}</span>
-                <h3 className="mt-5 text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-snow-muted">{item.description}</p>
-              </article>
-            </Reveal>
+            <AnimatedCard key={item.title} delay={index * 0.06} className="h-full p-6">
+              <span className="text-sm font-black text-snow-lilac transition duration-300 group-hover/card:text-white">
+                {item.step}
+              </span>
+              <h3 className="mt-5 text-xl font-black text-white">{item.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-snow-muted">{item.description}</p>
+            </AnimatedCard>
           ))}
         </div>
       </section>
@@ -204,7 +203,8 @@ export default function Home() {
               segment={client.segment}
               description={client.description}
               badge={client.badge}
-              delay={index * 0.05}
+              logo={client.logo}
+              delay={index * 0.055}
             />
           ))}
         </div>
@@ -215,7 +215,7 @@ export default function Home() {
           <SectionTitle
             eyebrow="Resultados"
             title="Resultado começa com estratégia"
-            description="Esta área está preparada para receber números reais de campanhas, vídeos e oportunidades geradas. Resultados variam conforme investimento, segmento e estratégia aplicada."
+            description="Dados reais de campanhas, conteúdos e projetos desenvolvidos para negócios locais que confiaram na Snow para profissionalizar sua presença digital."
           />
           <div className="grid gap-5 sm:grid-cols-2">
             {metrics.map((metric, index) => (
@@ -223,7 +223,8 @@ export default function Home() {
                 key={metric.label}
                 label={metric.label}
                 value={metric.value}
-                delay={index * 0.04}
+                description={metric.description}
+                delay={index * 0.045}
               />
             ))}
           </div>

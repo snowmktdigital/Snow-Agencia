@@ -93,6 +93,7 @@ export async function POST(request: Request) {
 
   const resendApiKey = process.env.RESEND_API_KEY;
   const contactTo = process.env.CONTACT_EMAIL_TO ?? "snowmktdigital@gmail.com";
+  // Configure CONTACT_EMAIL_FROM na Vercel quando o domínio de envio estiver verificado.
   const contactFrom =
     process.env.CONTACT_EMAIL_FROM ??
     "Snow Agência de Crescimento <onboarding@resend.dev>";
@@ -101,9 +102,9 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          "Envio por e-mail preparado. Configure RESEND_API_KEY na Vercel para ativar o disparo."
+          "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp."
       },
-      { status: 202 }
+      { status: 503 }
     );
   }
 
@@ -125,12 +126,15 @@ export async function POST(request: Request) {
 
   if (!response.ok) {
     return NextResponse.json(
-      { message: "Não foi possível enviar o e-mail agora. Tente pelo WhatsApp." },
+      {
+        message:
+          "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp."
+      },
       { status: 502 }
     );
   }
 
   return NextResponse.json({
-    message: "Mensagem enviada. Em breve a Snow entra em contato."
+    message: "Mensagem enviada com sucesso! Em breve nossa equipe vai entrar em contato."
   });
 }

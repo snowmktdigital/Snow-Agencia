@@ -6,7 +6,7 @@ import {
   MousePointerClick,
   Palette
 } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
+import { AnimatedCard } from "@/components/AnimatedCard";
 
 const iconMap = {
   social: Megaphone,
@@ -28,14 +28,12 @@ export function ServiceCard({ title, description, icon, delay = 0 }: ServiceCard
   const Icon = iconMap[icon as keyof typeof iconMap] ?? Megaphone;
 
   return (
-    <Reveal delay={delay} className="h-full">
-      <article className="glass-panel group h-full rounded-lg p-6 transition duration-300 hover:-translate-y-1 hover:border-snow-lilac/[0.55]">
-        <div className="mb-7 grid h-14 w-14 place-items-center rounded-lg border border-snow-border bg-snow-purple/20 text-snow-lilac shadow-glow">
-          <Icon aria-hidden="true" className="h-6 w-6" />
-        </div>
-        <h3 className="text-xl font-black text-white">{title}</h3>
-        <p className="mt-4 text-sm leading-7 text-snow-muted">{description}</p>
-      </article>
-    </Reveal>
+    <AnimatedCard delay={delay} className="h-full p-6">
+      <div className="mb-7 grid h-14 w-14 place-items-center rounded-lg border border-snow-border bg-snow-purple/20 text-snow-lilac shadow-glow transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3 group-hover/card:border-snow-lilac/70">
+        <Icon aria-hidden="true" className="h-6 w-6 drop-shadow-[0_0_10px_rgba(184,140,255,0.65)]" />
+      </div>
+      <h3 className="text-xl font-black text-white">{title}</h3>
+      <p className="mt-4 text-sm leading-7 text-snow-muted">{description}</p>
+    </AnimatedCard>
   );
 }

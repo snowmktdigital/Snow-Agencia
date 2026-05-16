@@ -23,13 +23,14 @@ CONTACT_EMAIL_FROM=Snow Agência de Crescimento <contato@snowagencia.com>
 RESEND_API_KEY=sua_chave_resend
 ```
 
-O domínio remetente precisa estar verificado no Resend para envio em produção.
+O domínio remetente precisa estar verificado no Resend para envio em produção. No futuro, o remetente pode ser alterado para um endereço profissional do domínio, como `contato@snowagencia.com`.
 
 ## Estrutura
 
 - `app/`: páginas, layout, SEO e API route.
 - `components/`: componentes reutilizáveis do site.
-- `data/site.ts`: textos, serviços, clientes, métricas e links editáveis.
+- `data/site.ts`: textos, serviços, clientes, métricas, logos e links editáveis.
+- `public/logos/`: logos reais dos clientes.
 - `public/images/snow-hero-orb.png`: asset visual gerado para a hero section.
 
 ## Deploy

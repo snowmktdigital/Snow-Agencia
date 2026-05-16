@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { BarChart2, ClipboardList, Construction, Layers3 } from "lucide-react";
+import { AnimatedCard } from "@/components/AnimatedCard";
 import { CTASection } from "@/components/CTASection";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
-import { Reveal } from "@/components/Reveal";
 import { SectionTitle } from "@/components/SectionTitle";
 
 export const metadata: Metadata = {
@@ -64,13 +64,11 @@ export default function PortfolioPage() {
           {caseStructure.map((item, index) => {
             const Icon = item.icon;
             return (
-              <Reveal key={item.title} delay={index * 0.05}>
-                <article className="glass-panel h-full rounded-lg p-6">
-                  <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac" />
-                  <h2 className="mt-6 text-xl font-black text-white">{item.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-snow-muted">{item.text}</p>
-                </article>
-              </Reveal>
+              <AnimatedCard key={item.title} delay={index * 0.055} className="h-full p-6">
+                <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
+                <h2 className="mt-6 text-xl font-black text-white">{item.title}</h2>
+                <p className="mt-4 text-sm leading-7 text-snow-muted">{item.text}</p>
+              </AnimatedCard>
             );
           })}
         </div>

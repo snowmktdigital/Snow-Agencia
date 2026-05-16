@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { clients } from "@/data/site";
 import { ClientCard } from "@/components/ClientCard";
@@ -23,19 +24,21 @@ export function PortfolioGrid() {
     <div>
       <div className="flex flex-wrap gap-3">
         {categories.map((category) => (
-          <button
+          <motion.button
             key={category}
             type="button"
             onClick={() => setActiveCategory(category)}
             className={cn(
-              "rounded-full border px-4 py-2 text-sm font-semibold transition",
+              "rounded-full border px-4 py-2 text-sm font-semibold transition duration-300",
               activeCategory === category
-                ? "border-snow-lilac bg-snow-lilac text-snow-bg"
+                ? "border-snow-lilac bg-snow-lilac text-snow-bg shadow-glow"
                 : "border-snow-border bg-white/[0.05] text-snow-muted hover:border-snow-lilac/70 hover:text-white"
             )}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.98 }}
           >
             {category}
-          </button>
+          </motion.button>
         ))}
       </div>
 
@@ -45,16 +48,18 @@ export function PortfolioGrid() {
             <ClientCard
               {...client}
               compact
-              delay={index * 0.05}
+              delay={index * 0.055}
             />
-            <button
+            <motion.button
               type="button"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-snow-border bg-white/[0.05] text-sm font-bold text-snow-muted transition hover:border-snow-lilac/70 hover:text-white"
               aria-label={`Ver detalhes de ${client.name}`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Em breve
               <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-            </button>
+            </motion.button>
           </div>
         ))}
       </div>

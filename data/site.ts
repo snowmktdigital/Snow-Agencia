@@ -6,7 +6,10 @@ export const INSTAGRAM_HANDLE = "@snowmktdigital";
 export const INSTAGRAM_URL = "https://instagram.com/snowmktdigital";
 export const SITE_URL = "snowagencia.com";
 export const MAP_URL =
-  "https://www.google.com/maps/search/?api=1&query=Snow%20Ag%C3%AAncia%20de%20Crescimento%20S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20PR";
+  "https://www.google.com/maps/search/?api=1&query=S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20PR";
+// Troque este embed pelo perfil oficial da Snow no Google quando a atualização do nome estiver disponível.
+export const MAP_EMBED_URL =
+  "https://www.google.com/maps?q=S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20PR&output=embed";
 
 export const navLinks = [
   { label: "Início", href: "/" },
@@ -124,9 +127,10 @@ export const clients = [
     category: "Academias",
     description:
       "Conteúdo, campanhas, vídeos e comunicação estratégica para unidades de academia em São José dos Pinhais.",
-    badge: "Social Media + Tráfego Pago",
+    badge: "Soluções completas Snow",
+    logo: "/logos/logo-phd-sports.svg",
     services: ["Social Media", "Tráfego Pago", "Vídeos/Reels"],
-    metrics: ["Métricas em atualização", "Campanhas em acompanhamento"]
+    metrics: ["Espaço para métricas reais", "Case completo em preparação"]
   },
   {
     name: "Restaurante Paraíso",
@@ -134,9 +138,10 @@ export const clients = [
     category: "Alimentação",
     description:
       "Gestão de presença digital, campanhas e conteúdos para fortalecer o relacionamento com clientes locais.",
-    badge: "Presença digital",
+    badge: "Soluções completas Snow",
+    logo: "/logos/logo-restaurante-paraiso.svg",
     services: ["Social Media", "Tráfego Pago", "Vídeos/Reels"],
-    metrics: ["Dados em atualização", "Conteúdos gastronômicos"]
+    metrics: ["Espaço para métricas reais", "Case completo em preparação"]
   },
   {
     name: "Ótica Stilux",
@@ -144,9 +149,10 @@ export const clients = [
     category: "Óticas",
     description:
       "Comunicação visual, conteúdo estratégico e presença digital para gerar autoridade no segmento óptico.",
-    badge: "Conteúdo estratégico",
+    badge: "Soluções completas Snow",
+    logo: "/logos/logo-otica-stilux.svg",
     services: ["Social Media", "Identidade Visual"],
-    metrics: ["Autoridade visual", "Rotina de conteúdo"]
+    metrics: ["Espaço para métricas reais", "Case completo em preparação"]
   },
   {
     name: "Parada do Espeto",
@@ -154,9 +160,10 @@ export const clients = [
     category: "Alimentação",
     description:
       "Conteúdos gastronômicos, vídeos e campanhas para destacar produtos e atrair o público da região.",
-    badge: "Vídeos + Campanhas",
+    badge: "Soluções completas Snow",
+    logo: "/logos/logo-parada-do-espeto.svg",
     services: ["Vídeos/Reels", "Social Media", "Tráfego Pago"],
-    metrics: ["Produção de vídeos", "Campanhas locais"]
+    metrics: ["Espaço para métricas reais", "Case completo em preparação"]
   },
   {
     name: "American Burger",
@@ -164,19 +171,50 @@ export const clients = [
     category: "Alimentação",
     description:
       "Estratégia de comunicação para fortalecer desejo, marca e presença local no segmento de alimentação.",
-    badge: "Marca local",
+    badge: "Soluções completas Snow",
+    logo: "/logos/logo-american-burger.svg",
     services: ["Social Media", "Vídeos/Reels", "Consultoria Estratégica"],
-    metrics: ["Posicionamento", "Conteúdo de desejo"]
+    metrics: ["Espaço para métricas reais", "Case completo em preparação"]
   }
 ];
 
 export const metrics = [
-  { label: "Alcance gerado em campanhas", value: "Dados reais em atualização" },
-  { label: "Conversas iniciadas no WhatsApp", value: "Dados reais em atualização" },
-  { label: "Conteúdos produzidos", value: "Dados reais em atualização" },
-  { label: "Negócios locais atendidos", value: "Dados reais em atualização" },
-  { label: "Visualizações em vídeos", value: "Dados reais em atualização" },
-  { label: "Campanhas otimizadas", value: "Dados reais em atualização" }
+  {
+    value: "+R$45 mil",
+    label: "em anúncios gerenciados",
+    description:
+      "Investimento aplicado em campanhas digitais para atrair clientes e gerar oportunidades."
+  },
+  {
+    value: "+10.700",
+    label: "conversas no WhatsApp",
+    description:
+      "Leads e oportunidades iniciadas através de estratégias digitais e tráfego pago."
+  },
+  {
+    value: "+519 mil",
+    label: "contas alcançadas",
+    description:
+      "Pessoas impactadas por conteúdos, campanhas e ações de presença digital."
+  },
+  {
+    value: "+779",
+    label: "conteúdos produzidos",
+    description:
+      "Posts, criativos, vídeos e materiais estratégicos criados para marcas locais."
+  },
+  {
+    value: "+15 milhões",
+    label: "de visualizações",
+    description:
+      "Alcance gerado através de vídeos, Reels e conteúdos pensados para atenção."
+  },
+  {
+    value: "+5 segmentos",
+    label: "atendidos",
+    description:
+      "Experiência com academias, restaurantes, óticas, hamburguerias e comércios locais."
+  }
 ];
 
 export const differentials = [
