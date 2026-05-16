@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { clients } from "@/data/site";
 import { ClientCard } from "@/components/ClientCard";
 import { cn } from "@/lib/utils";
@@ -44,23 +43,12 @@ export function PortfolioGrid() {
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {filteredClients.map((client, index) => (
-          <div key={client.name} className="flex h-full flex-col gap-4">
-            <ClientCard
-              {...client}
-              compact
-              delay={index * 0.13}
-            />
-            <motion.button
-              type="button"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-snow-border bg-white/[0.05] text-sm font-bold text-snow-muted transition hover:border-snow-lilac/70 hover:text-white"
-              aria-label={`Ver detalhes de ${client.name}`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Em breve
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-            </motion.button>
-          </div>
+          <ClientCard
+            key={client.name}
+            {...client}
+            compact
+            delay={index * 0.13}
+          />
         ))}
       </div>
     </div>
