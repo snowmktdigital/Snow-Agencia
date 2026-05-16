@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion } from "framer-motion";
 import { Snowflake } from "lucide-react";
 
 export function GlobalCursorEffect() {
@@ -9,8 +9,6 @@ export function GlobalCursorEffect() {
   const [visible, setVisible] = useState(false);
   const x = useMotionValue(-120);
   const y = useMotionValue(-120);
-  const springX = useSpring(x, { stiffness: 210, damping: 28, mass: 0.32 });
-  const springY = useSpring(y, { stiffness: 210, damping: 28, mass: 0.32 });
 
   useEffect(() => {
     const canShowCursor =
@@ -45,14 +43,13 @@ export function GlobalCursorEffect() {
   return (
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-20 hidden h-28 w-28 -translate-x-1/2 -translate-y-1/2 mix-blend-screen md:block"
-      style={{ left: springX, top: springY }}
-      animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.72 }}
-      transition={{ duration: 0.22, ease: "easeOut" }}
+      className="pointer-events-none fixed left-0 top-0 z-20 hidden h-9 w-9 -translate-x-1/2 -translate-y-1/2 mix-blend-screen md:block"
+      style={{ left: x, top: y }}
+      animate={{ opacity: visible ? 0.78 : 0, scale: visible ? 1 : 0.86 }}
+      transition={{ duration: 0.12, ease: "easeOut" }}
     >
-      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(184,140,255,0.19)_0%,rgba(123,63,242,0.09)_30%,transparent_68%)] blur-xl" />
-      <div className="absolute inset-7 rounded-full bg-[radial-gradient(circle,rgba(184,140,255,0.14)_0%,transparent_68%)] blur-lg" />
-      <Snowflake className="absolute left-1/2 top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 text-snow-lilac/38 drop-shadow-[0_0_12px_rgba(184,140,255,0.64)]" />
+      <div className="absolute -inset-3 rounded-full bg-[radial-gradient(circle,rgba(184,140,255,0.22)_0%,rgba(123,63,242,0.1)_34%,transparent_72%)] blur-md" />
+      <Snowflake className="absolute left-1/2 top-1/2 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 text-snow-lilac/65 drop-shadow-[0_0_10px_rgba(184,140,255,0.74)]" />
     </motion.div>
   );
 }
