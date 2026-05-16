@@ -70,12 +70,12 @@ export default function LocalizacaoPage() {
         </div>
       </section>
 
-      <section className="container-snow py-16">
+      <section className="container-snow py-24 lg:py-28">
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {infoCards.map((card, index) => {
             const Icon = card.icon;
             return (
-              <AnimatedCard key={card.label} delay={index * 0.055} className="h-full p-6">
+              <AnimatedCard key={card.label} delay={index * 0.12} className="h-full p-6">
                 <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
                 <p className="mt-5 text-sm font-bold text-snow-lilac">{card.label}</p>
                 <h2 className="mt-2 text-lg font-black leading-7 text-white">{card.value}</h2>

@@ -7,10 +7,14 @@ type Particle = {
   y: number;
   vx: number;
   vy: number;
+  baseVX: number;
+  baseVY: number;
   size: number;
   alpha: number;
+  targetAlpha: number;
   hue: number;
-  orbit: number;
+  drift: number;
+  phase: number;
 };
 
 export function ParticleSnowBackground() {
@@ -31,24 +35,41 @@ export function ParticleSnowBackground() {
     let height = 0;
     let frame = 0;
     let animationId = 0;
+    let isMobile = false;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function createParticle(yPosition = Math.random() * height): Particle {
+      const largeFlake = Math.random() > (isMobile ? 0.86 : 0.78);
+      const size = largeFlake
+        ? 1.9 + Math.random() * (isMobile ? 1.2 : 2.2)
+        : 0.55 + Math.random() * (isMobile ? 1.25 : 1.85);
+      const baseVY = 0.45 + Math.random() * (isMobile ? 0.55 : 0.92);
+      const baseVX = (Math.random() - 0.5) * (isMobile ? 0.12 : 0.2);
+      const targetAlpha = 0.18 + Math.random() * (largeFlake ? 0.42 : 0.32);
+
+      return {
+        x: Math.random() * width,
+        y: yPosition,
+        vx: baseVX,
+        vy: baseVY,
+        baseVX,
+        baseVY,
+        size,
+        alpha: targetAlpha,
+        targetAlpha,
+        hue: Math.random() > 0.5 ? 184 : 255,
+        drift: 0.4 + Math.random() * 1.45,
+        phase: Math.random() * Math.PI * 2
+      };
+    }
 
     function seedParticles() {
       particles.length = 0;
-      const isMobile = window.innerWidth < 768;
-      const count = isMobile ? 36 : Math.min(94, Math.floor((width * height) / 18000));
+      isMobile = window.innerWidth < 768;
+      const count = isMobile ? 52 : Math.min(148, Math.floor((width * height) / 12200));
 
       for (let index = 0; index < count; index += 1) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (isMobile ? 0.12 : 0.22),
-          vy: 0.08 + Math.random() * (isMobile ? 0.12 : 0.2),
-          size: 0.8 + Math.random() * (isMobile ? 1.3 : 2.1),
-          alpha: 0.22 + Math.random() * 0.42,
-          hue: Math.random() > 0.62 ? 184 : 255,
-          orbit: Math.random() * Math.PI * 2
-        });
+        particles.push(createParticle(Math.random() * height));
       }
     }
 
@@ -65,27 +86,33 @@ export function ParticleSnowBackground() {
     }
 
     function drawParticle(particle: Particle) {
+      const twinkle = 0.75 + Math.sin(frame * 0.018 + particle.phase) * 0.25;
+      const alpha = Math.min(0.72, particle.alpha * twinkle);
       const color =
         particle.hue === 184
-          ? `rgba(184, 140, 255, ${particle.alpha})`
-          : `rgba(255, 255, 255, ${particle.alpha * 0.72})`;
+          ? `rgba(184, 140, 255, ${alpha})`
+          : `rgba(255, 255, 255, ${alpha * 0.76})`;
 
       ctx.beginPath();
       ctx.fillStyle = color;
-      ctx.shadowColor = particle.hue === 184 ? "rgba(184, 140, 255, 0.55)" : "rgba(255,255,255,0.36)";
-      ctx.shadowBlur = particle.size * 5;
+      ctx.shadowColor = particle.hue === 184 ? "rgba(184, 140, 255, 0.62)" : "rgba(255,255,255,0.42)";
+      ctx.shadowBlur = particle.size * 6.5;
       ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      if (particle.size > 1.8) {
-        ctx.strokeStyle = `rgba(184, 140, 255, ${particle.alpha * 0.28})`;
+      if (particle.size > 2) {
+        ctx.strokeStyle = `rgba(184, 140, 255, ${alpha * 0.34})`;
         ctx.lineWidth = 0.6;
         ctx.beginPath();
         ctx.moveTo(particle.x - particle.size * 2.4, particle.y);
         ctx.lineTo(particle.x + particle.size * 2.4, particle.y);
         ctx.moveTo(particle.x, particle.y - particle.size * 2.4);
         ctx.lineTo(particle.x, particle.y + particle.size * 2.4);
+        ctx.moveTo(particle.x - particle.size * 1.7, particle.y - particle.size * 1.7);
+        ctx.lineTo(particle.x + particle.size * 1.7, particle.y + particle.size * 1.7);
+        ctx.moveTo(particle.x + particle.size * 1.7, particle.y - particle.size * 1.7);
+        ctx.lineTo(particle.x - particle.size * 1.7, particle.y + particle.size * 1.7);
         ctx.stroke();
       }
     }
@@ -98,25 +125,30 @@ export function ParticleSnowBackground() {
         const dx = particle.x - pointer.x;
         const dy = particle.y - pointer.y;
         const distance = Math.hypot(dx, dy);
-        const repelRadius = window.innerWidth < 768 ? 74 : 128;
+        const repelRadius = isMobile ? 78 : 142;
 
         if (!reduceMotion && distance < repelRadius && distance > 0.01) {
-          const force = (1 - distance / repelRadius) * 1.65;
-          particle.vx += (dx / distance) * force * 0.08;
-          particle.vy += (dy / distance) * force * 0.08;
+          const force = (1 - distance / repelRadius) * 2.18;
+          particle.x += (dx / distance) * force * 1.2;
+          particle.y += (dy / distance) * force * 0.82;
+          particle.vx += (dx / distance) * force * 0.12;
+          particle.vy += (dy / distance) * force * 0.06;
         }
 
         if (!reduceMotion) {
-          particle.orbit += 0.01;
-          particle.x += particle.vx + Math.sin(frame * 0.006 + particle.orbit) * 0.08;
+          const drift = Math.sin(frame * 0.01 + particle.phase) * particle.drift * 0.28;
+          particle.x += particle.vx + drift;
           particle.y += particle.vy;
-          particle.vx *= 0.986;
-          particle.vy *= 0.992;
+          particle.vx += (particle.baseVX - particle.vx) * 0.012;
+          particle.vy += (particle.baseVY - particle.vy) * 0.018;
+          particle.alpha += (particle.targetAlpha - particle.alpha) * 0.02;
         }
 
-        if (particle.y > height + 18) particle.y = -18;
-        if (particle.x < -18) particle.x = width + 18;
-        if (particle.x > width + 18) particle.x = -18;
+        if (particle.y > height + 28) {
+          Object.assign(particle, createParticle(-28 - Math.random() * 90));
+        }
+        if (particle.x < -28) particle.x = width + 28;
+        if (particle.x > width + 28) particle.x = -28;
 
         drawParticle(particle);
       }
@@ -153,7 +185,7 @@ export function ParticleSnowBackground() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 opacity-75 mix-blend-screen"
+      className="pointer-events-none fixed inset-0 z-0 opacity-85 mix-blend-screen"
     />
   );
 }

@@ -6,7 +6,7 @@ export const INSTAGRAM_HANDLE = "@snowmktdigital";
 export const INSTAGRAM_URL = "https://instagram.com/snowmktdigital";
 export const SITE_URL = "snowagencia.com";
 export const MAP_URL =
-  "https://www.google.com/maps/search/?api=1&query=S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20PR";
+  "https://share.google/fE0ue8FjqKMWUDJs8";
 // Troque este embed pelo perfil oficial da Snow no Google quando a atualização do nome estiver disponível.
 export const MAP_EMBED_URL =
   "https://www.google.com/maps?q=S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20PR&output=embed";

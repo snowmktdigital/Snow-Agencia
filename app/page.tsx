@@ -56,35 +56,37 @@ const businessIcons = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden pt-28 sm:pt-34 lg:pt-40">
-        <div className="container-snow grid min-h-[calc(100vh-5rem)] items-center gap-8 pb-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
+      <section className="relative overflow-hidden pt-24 sm:pt-34 lg:pt-40">
+        <div className="container-snow grid min-h-[calc(100svh-4rem)] items-center gap-6 pb-10 sm:gap-8 sm:pb-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
           <div>
             <Reveal>
-              <p className="mb-5 inline-flex rounded-full border border-snow-border bg-white/[0.06] px-4 py-2 text-xs font-bold uppercase text-snow-lilac sm:text-sm">
+              <p className="mb-4 inline-flex rounded-full border border-snow-border bg-white/[0.06] px-3 py-1.5 text-[0.66rem] font-bold uppercase text-snow-lilac sm:mb-5 sm:px-4 sm:py-2 sm:text-sm">
                 Snow Agência de Crescimento em São José dos Pinhais
               </p>
-              <h1 className="max-w-4xl text-balance text-4xl font-black leading-[1.04] text-white sm:text-5xl lg:text-[4.25rem]">
-                Estratégia, conteúdo e tráfego pago para negócios locais que querem crescer com presença digital profissional.
+              <h1 className="max-w-[21rem] text-balance text-[2.35rem] font-black leading-[1.02] text-white sm:max-w-4xl sm:text-5xl lg:text-[4.25rem]">
+                <span className="sm:hidden">Marketing com estratégia para negócios locais crescerem.</span>
+                <span className="hidden sm:inline">Estratégia, conteúdo e tráfego pago para negócios locais que querem crescer com presença digital profissional.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-pretty text-[0.98rem] leading-7 text-snow-muted sm:text-lg sm:leading-8">
-                Ajudamos negócios locais a transformarem presença digital em autoridade, relacionamento e oportunidades reais de venda.
+              <p className="mt-4 max-w-[20rem] text-pretty text-[0.92rem] leading-6 text-snow-muted sm:mt-6 sm:max-w-xl sm:text-lg sm:leading-8">
+                <span className="sm:hidden">Presença digital profissional para atrair clientes, gerar conversas e vender mais.</span>
+                <span className="hidden sm:inline">Ajudamos negócios locais a transformarem presença digital em autoridade, relacionamento e oportunidades reais de venda.</span>
               </p>
             </Reveal>
 
-            <Reveal delay={0.1} className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Reveal delay={0.14} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
               <Button href={WHATSAPP_URL} size="lg" showArrow>
                 Quero crescer com a Snow
               </Button>
-              <Button href="/#servicos" variant="secondary" size="lg">
+              <Button href="/#servicos" variant="secondary" size="lg" className="max-sm:h-12 max-sm:text-sm">
                 Conhecer serviços
               </Button>
             </Reveal>
 
-            <Reveal delay={0.18} className="mt-8 flex max-w-xl flex-wrap gap-2.5 sm:gap-3">
-              {authorityPills.map((pill) => (
+            <Reveal delay={0.26} className="mt-6 flex max-w-xl flex-wrap gap-2 sm:mt-8 sm:gap-3">
+              {authorityPills.map((pill, index) => (
                 <span
                   key={pill}
-                  className="rounded-full border border-snow-border bg-white/[0.06] px-3.5 py-2 text-xs font-semibold text-snow-muted backdrop-blur-xl sm:text-sm"
+                  className={`${index > 2 ? "hidden sm:inline-flex" : "inline-flex"} rounded-full border border-snow-border bg-white/[0.06] px-3 py-1.5 text-[0.72rem] font-semibold text-snow-muted backdrop-blur-xl sm:px-3.5 sm:py-2 sm:text-sm`}
                 >
                   {pill}
                 </span>
@@ -96,7 +98,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionTitle
             eyebrow="Diagnóstico"
@@ -108,7 +110,7 @@ export default function Home() {
             {painPoints.map((pain, index) => {
               const Icon = painIcons[index];
               return (
-                <AnimatedCard key={pain} delay={index * 0.055} className="h-full p-5">
+                <AnimatedCard key={pain} delay={index * 0.115} className="h-full p-5">
                   <Icon aria-hidden="true" className="h-5 w-5 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
                   <h3 className="mt-4 text-base font-black text-white">{pain}</h3>
                 </AnimatedCard>
@@ -118,7 +120,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="servicos" className="container-snow scroll-mt-28 py-20">
+      <section id="servicos" className="container-snow scroll-mt-28 py-24 lg:py-28">
         <SectionTitle
           eyebrow="Serviços"
           title="Soluções para transformar presença digital em crescimento"
@@ -132,13 +134,13 @@ export default function Home() {
               title={service.title}
               description={service.description}
               icon={service.icon}
-              delay={index * 0.055}
+              delay={index * 0.115}
             />
           ))}
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <SectionTitle
             eyebrow="Para quem é"
@@ -150,7 +152,7 @@ export default function Home() {
             {businessTypes.map((type, index) => {
               const Icon = businessIcons[index];
               return (
-                <AnimatedCard key={type} delay={index * 0.045} className="p-5">
+                <AnimatedCard key={type} delay={index * 0.095} className="p-5">
                   <div className="flex items-center gap-4">
                     <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-snow-purple/20 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3">
                       <Icon aria-hidden="true" className="h-5 w-5" />
@@ -164,7 +166,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <SectionTitle
           eyebrow="Método Snow"
           title="Um processo claro para tirar seu marketing do improviso"
@@ -172,7 +174,7 @@ export default function Home() {
         />
         <div className="mt-12 grid gap-5 lg:grid-cols-5">
           {snowMethod.map((item, index) => (
-            <AnimatedCard key={item.title} delay={index * 0.06} className="h-full p-6">
+            <AnimatedCard key={item.title} delay={index * 0.125} className="h-full p-6">
               <span className="text-sm font-black text-snow-lilac transition duration-300 group-hover/card:text-white">
                 {item.step}
               </span>
@@ -183,7 +185,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionTitle
             eyebrow="Portfólio"
@@ -204,13 +206,13 @@ export default function Home() {
               description={client.description}
               badge={client.badge}
               logo={client.logo}
-              delay={index * 0.055}
+              delay={index * 0.12}
             />
           ))}
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionTitle
             eyebrow="Resultados"
@@ -224,7 +226,7 @@ export default function Home() {
                 label={metric.label}
                 value={metric.value}
                 description={metric.description}
-                delay={index * 0.045}
+                delay={index * 0.105}
               />
             ))}
           </div>

@@ -29,6 +29,8 @@ function ClientCardContent({
   compact = false,
   preview = false
 }: ClientCardProps & { preview?: boolean }) {
+  const isAmericanBurger = name === "American Burger";
+
   return (
     <>
       <div
@@ -40,14 +42,22 @@ function ClientCardContent({
       >
         <div className="absolute inset-0 snow-grid opacity-35" />
         <div className="absolute inset-8 bg-snow-lilac/15 blur-3xl" />
-        <div className="relative grid h-24 w-4/5 place-items-center rounded-lg border border-snow-border bg-white/[0.08] px-5 py-4 shadow-[0_0_36px_rgba(184,140,255,0.16)] backdrop-blur-xl transition duration-300 group-hover/card:border-snow-lilac/60 group-hover/card:shadow-glow">
+        <div
+          className={cn(
+            "relative grid h-24 w-4/5 place-items-center rounded-lg border border-snow-border bg-white/[0.08] px-5 py-4 shadow-[0_0_36px_rgba(184,140,255,0.16)] backdrop-blur-xl transition duration-300 group-hover/card:border-snow-lilac/60 group-hover/card:shadow-glow",
+            isAmericanBurger && "bg-white/[0.13] shadow-[0_0_46px_rgba(255,255,255,0.11),0_0_36px_rgba(184,140,255,0.2)]"
+          )}
+        >
           {logo ? (
             <Image
               src={logo}
               alt={`Logo ${name}`}
               fill
               sizes="(min-width: 1024px) 260px, 70vw"
-              className="object-contain p-4 drop-shadow-[0_0_12px_rgba(255,255,255,0.2)] transition duration-300 group-hover/card:scale-105 group-hover/card:drop-shadow-[0_0_22px_rgba(184,140,255,0.55)]"
+              className={cn(
+                "object-contain p-4 drop-shadow-[0_0_12px_rgba(255,255,255,0.2)] transition duration-300 group-hover/card:scale-105 group-hover/card:drop-shadow-[0_0_22px_rgba(184,140,255,0.55)]",
+                isAmericanBurger && "brightness-0 invert contrast-125 drop-shadow-[0_0_18px_rgba(255,255,255,0.38)]"
+              )}
             />
           ) : (
             <Layers3 aria-hidden="true" className="h-7 w-7 text-snow-lilac" />

@@ -15,7 +15,7 @@ export function CTASection({
   buttonLabel = "Falar com a Snow no WhatsApp"
 }: CTASectionProps) {
   return (
-    <section className="container-snow py-20">
+    <section className="container-snow py-24 lg:py-28">
       <Reveal>
         <div className="glass-panel relative overflow-hidden rounded-lg p-8 transition duration-300 hover:border-snow-lilac/60 sm:p-10 lg:p-14">
           <div className="absolute inset-0 snow-grid opacity-20" aria-hidden="true" />

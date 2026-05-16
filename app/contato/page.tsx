@@ -7,6 +7,7 @@ import {
   CONTACT_EMAIL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
+  MAP_URL,
   SITE_URL,
   WHATSAPP_DISPLAY,
   WHATSAPP_URL
@@ -49,6 +50,7 @@ const contactItems = [
   {
     label: "Localização",
     value: "São José dos Pinhais - PR",
+    href: MAP_URL,
     icon: MapPin
   },
   {
@@ -61,7 +63,7 @@ const contactItems = [
 export default function ContatoPage() {
   return (
     <section className="container-snow pt-32 sm:pt-36 lg:pt-40">
-      <div className="grid gap-10 pb-20 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+      <div className="grid gap-10 pb-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-start lg:pb-28">
         <div>
           <SectionTitle
             eyebrow="Contato"

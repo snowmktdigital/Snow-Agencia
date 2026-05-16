@@ -48,11 +48,11 @@ export default function PortfolioPage() {
         />
       </section>
 
-      <section className="container-snow py-14">
+      <section className="container-snow py-20 lg:py-24">
         <PortfolioGrid />
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <SectionTitle
           eyebrow="Estudos de caso"
           title="Estrutura pronta para apresentar resultados completos"
@@ -64,7 +64,7 @@ export default function PortfolioPage() {
           {caseStructure.map((item, index) => {
             const Icon = item.icon;
             return (
-              <AnimatedCard key={item.title} delay={index * 0.055} className="h-full p-6">
+              <AnimatedCard key={item.title} delay={index * 0.12} className="h-full p-6">
                 <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
                 <h2 className="mt-6 text-xl font-black text-white">{item.title}</h2>
                 <p className="mt-4 text-sm leading-7 text-snow-muted">{item.text}</p>

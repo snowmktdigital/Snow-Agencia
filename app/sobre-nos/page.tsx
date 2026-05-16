@@ -74,12 +74,12 @@ export default function SobreNosPage() {
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <div className="grid gap-6 lg:grid-cols-3">
           {pillars.map((pillar, index) => {
             const Icon = pillar.icon;
             return (
-              <AnimatedCard key={pillar.title} delay={index * 0.06} className="h-full p-7">
+              <AnimatedCard key={pillar.title} delay={index * 0.12} className="h-full p-7">
                 <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
                 <h2 className="mt-6 text-2xl font-black text-white">{pillar.title}</h2>
                 <p className="mt-4 text-sm leading-7 text-snow-muted">{pillar.text}</p>
@@ -89,7 +89,7 @@ export default function SobreNosPage() {
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <SectionTitle
           eyebrow="Diferenciais"
           title="Marketing local com direção, intenção e acompanhamento"
@@ -99,7 +99,7 @@ export default function SobreNosPage() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {differentials.map((item, index) => (
-            <AnimatedCard key={item} delay={index * 0.045} className="p-6">
+            <AnimatedCard key={item} delay={index * 0.1} className="p-6">
               <span className="text-sm font-black text-snow-lilac">0{index + 1}</span>
               <h3 className="mt-4 text-lg font-black text-white">{item}</h3>
             </AnimatedCard>
@@ -107,12 +107,12 @@ export default function SobreNosPage() {
         </div>
       </section>
 
-      <section className="container-snow py-20">
+      <section className="container-snow py-24 lg:py-28">
         <div className="grid gap-6 lg:grid-cols-3">
           {proofCards.map((card, index) => {
             const Icon = card.icon;
             return (
-              <AnimatedCard key={card.title} delay={index * 0.06} className="h-full p-7">
+              <AnimatedCard key={card.title} delay={index * 0.12} className="h-full p-7">
                 <Icon aria-hidden="true" className="h-6 w-6 text-snow-lilac transition duration-300 group-hover/card:scale-110 group-hover/card:rotate-3" />
                 <h2 className="mt-6 text-xl font-black text-white">{card.title}</h2>
                 <p className="mt-4 text-sm leading-7 text-snow-muted">{card.text}</p>

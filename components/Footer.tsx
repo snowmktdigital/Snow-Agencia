@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Instagram, Mail, MapPin, MessageCircle, Snowflake } from "lucide-react";
+import { FooterServiceLinks } from "@/components/FooterServiceLinks";
 import {
   CONTACT_EMAIL,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
+  MAP_URL,
   navLinks,
-  services,
   SITE_URL,
   WHATSAPP_DISPLAY,
   WHATSAPP_URL
@@ -14,7 +15,7 @@ import {
 export function Footer() {
   return (
     <footer className="border-t border-snow-border bg-snow-bg/[0.82]">
-      <div className="container-snow grid gap-10 py-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
+      <div className="container-snow grid gap-10 py-14 lg:grid-cols-[1.2fr_0.7fr_1fr_1fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
             <span className="grid h-11 w-11 place-items-center rounded-lg border border-snow-border bg-white/[0.07]">
@@ -45,13 +46,9 @@ export function Footer() {
 
         <div>
           <h2 className="text-sm font-bold text-white">Serviços</h2>
-          <ul className="mt-4 space-y-3">
-            {services.slice(0, 6).map((service) => (
-              <li key={service.title} className="text-sm text-snow-muted">
-                {service.title}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-4">
+            <FooterServiceLinks />
+          </div>
         </div>
 
         <div>
@@ -73,9 +70,11 @@ export function Footer() {
               <Mail aria-hidden="true" className="h-4 w-4 text-snow-lilac" />
               {CONTACT_EMAIL}
             </li>
-            <li className="inline-flex items-center gap-2">
-              <MapPin aria-hidden="true" className="h-4 w-4 text-snow-lilac" />
-              São José dos Pinhais - PR
+            <li>
+              <a className="inline-flex items-center gap-2 transition hover:text-white" href={MAP_URL} target="_blank" rel="noreferrer">
+                <MapPin aria-hidden="true" className="h-4 w-4 text-snow-lilac" />
+                São José dos Pinhais - PR
+              </a>
             </li>
           </ul>
         </div>

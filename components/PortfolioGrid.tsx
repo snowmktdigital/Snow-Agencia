@@ -48,7 +48,7 @@ export function PortfolioGrid() {
             <ClientCard
               {...client}
               compact
-              delay={index * 0.055}
+              delay={index * 0.13}
             />
             <motion.button
               type="button"
