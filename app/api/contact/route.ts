@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+export const runtime = "nodejs";
 
 const requiredFields = [
   "name",
@@ -76,8 +79,100 @@ function buildHtml(payload: ContactPayload) {
   `;
 }
 
+function getContactConfig() {
+  const contactTo = process.env.CONTACT_EMAIL_TO ?? "contato@snowagencia.com";
+  const smtpUser = process.env.SMTP_USER;
+
+  return {
+    contactTo,
+    contactFrom:
+      process.env.CONTACT_EMAIL_FROM ??
+      (smtpUser
+        ? `Snow Agência de Crescimento <${smtpUser}>`
+        : "Snow Agência de Crescimento <contato@snowagencia.com>"),
+    resendApiKey: process.env.RESEND_API_KEY,
+    smtp: {
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT ?? "465"),
+      secure:
+        process.env.SMTP_SECURE !== undefined
+          ? process.env.SMTP_SECURE === "true"
+          : Number(process.env.SMTP_PORT ?? "465") === 465,
+      user: smtpUser,
+      pass: process.env.SMTP_PASS
+    }
+  };
+}
+
+async function sendWithSmtp(payload: ContactPayload, config: ReturnType<typeof getContactConfig>) {
+  const { host, port, secure, user, pass } = config.smtp;
+
+  if (!host || !user || !pass) {
+    throw new Error("SMTP_NOT_CONFIGURED");
+  }
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+    auth: {
+      user,
+      pass
+    }
+  });
+
+  await transporter.sendMail({
+    from: config.contactFrom,
+    to: config.contactTo,
+    replyTo: payload.email,
+    subject: `Novo lead Snow: ${payload.company}`,
+    text: buildText(payload),
+    html: buildHtml(payload)
+  });
+}
+
+async function sendWithResend(payload: ContactPayload, config: ReturnType<typeof getContactConfig>) {
+  if (!config.resendApiKey) {
+    throw new Error("RESEND_NOT_CONFIGURED");
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.resendApiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: config.contactFrom,
+      to: [config.contactTo],
+      reply_to: payload.email,
+      subject: `Novo lead Snow: ${payload.company}`,
+      text: buildText(payload),
+      html: buildHtml(payload)
+    })
+  });
+
+  if (!response.ok) {
+    const responseText = await response.text().catch(() => "");
+    throw new Error(`RESEND_ERROR_${response.status}: ${responseText}`);
+  }
+}
+
 export async function POST(request: Request) {
-  const body = (await request.json()) as Record<string, unknown>;
+  let body: Record<string, unknown>;
+
+  try {
+    body = (await request.json()) as Record<string, unknown>;
+  } catch {
+    return NextResponse.json(
+      { message: "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp." },
+      { status: 400 }
+    );
+  }
+
   const payload = Object.fromEntries(
     Object.entries(body).map(([key, value]) => [key, sanitize(value)])
   ) as ContactPayload;
@@ -91,14 +186,12 @@ export async function POST(request: Request) {
     );
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const contactTo = process.env.CONTACT_EMAIL_TO ?? "snowmktdigital@gmail.com";
-  // Configure CONTACT_EMAIL_FROM na Vercel quando o domínio de envio estiver verificado.
-  const contactFrom =
-    process.env.CONTACT_EMAIL_FROM ??
-    "Snow Agência de Crescimento <onboarding@resend.dev>";
+  const config = getContactConfig();
+  const hasSmtpConfig = Boolean(config.smtp.host && config.smtp.user && config.smtp.pass);
+  const hasResendConfig = Boolean(config.resendApiKey);
 
-  if (!resendApiKey) {
+  if (!hasSmtpConfig && !hasResendConfig) {
+    console.error("Contact form email provider is not configured. Set SMTP_* or RESEND_API_KEY on Vercel.");
     return NextResponse.json(
       {
         message:
@@ -108,30 +201,38 @@ export async function POST(request: Request) {
     );
   }
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      from: contactFrom,
-      to: [contactTo],
-      reply_to: payload.email,
-      subject: `Novo lead Snow: ${payload.company}`,
-      text: buildText(payload),
-      html: buildHtml(payload)
-    })
-  });
+  try {
+    if (hasSmtpConfig) {
+      await sendWithSmtp(payload, config);
+    } else {
+      await sendWithResend(payload, config);
+    }
+  } catch (error) {
+    console.error("Contact form email send failed.", error);
 
-  if (!response.ok) {
-    return NextResponse.json(
-      {
-        message:
-          "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp."
-      },
-      { status: 502 }
-    );
+    if (hasSmtpConfig && hasResendConfig) {
+      try {
+        await sendWithResend(payload, config);
+      } catch (fallbackError) {
+        console.error("Contact form Resend fallback failed.", fallbackError);
+
+        return NextResponse.json(
+          {
+            message:
+              "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp."
+          },
+          { status: 502 }
+        );
+      }
+    } else {
+      return NextResponse.json(
+        {
+          message:
+            "Não conseguimos enviar sua mensagem agora. Tente novamente ou fale direto pelo WhatsApp."
+        },
+        { status: 502 }
+      );
+    }
   }
 
   return NextResponse.json({
