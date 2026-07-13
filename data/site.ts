@@ -1,4 +1,4 @@
-export const CONTACT_EMAIL = "snowmktdigital@gmail.com";
+export const CONTACT_EMAIL = "contato@snowagencia.com";
 export const WHATSAPP_DISPLAY = "(41) 98740-3226";
 export const WHATSAPP_URL =
   "https://wa.me/5541987403226?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Snow%20Ag%C3%AAncia%20de%20Crescimento%20e%20quero%20saber%20mais%20sobre%20os%20servi%C3%A7os.";
