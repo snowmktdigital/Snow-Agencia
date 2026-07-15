@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "start:next": "next start"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
@@ -31,5 +32,9 @@
   },
   "overrides": {
     "postcss": "^8.5.10"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": ">=20.11.0"
   }
 }
