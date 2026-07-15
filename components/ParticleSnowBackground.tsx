@@ -36,7 +36,7 @@ export function ParticleSnowBackground() {
     let frame = 0;
     let animationId = 0;
     let isMobile = false;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function createParticle(yPosition = Math.random() * height): Particle {
       const largeFlake = Math.random() > (isMobile ? 0.86 : 0.78);
@@ -127,22 +127,22 @@ export function ParticleSnowBackground() {
         const distance = Math.hypot(dx, dy);
         const repelRadius = isMobile ? 78 : 142;
 
-        if (!reduceMotion && distance < repelRadius && distance > 0.01) {
-          const force = (1 - distance / repelRadius) * 2.18;
-          particle.x += (dx / distance) * force * 1.2;
-          particle.y += (dy / distance) * force * 0.82;
-          particle.vx += (dx / distance) * force * 0.12;
-          particle.vy += (dy / distance) * force * 0.06;
+        const motionScale = prefersReducedMotion ? 0.35 : 1;
+
+        if (distance < repelRadius && distance > 0.01) {
+          const force = (1 - distance / repelRadius) * (prefersReducedMotion ? 0.95 : 2.18);
+          particle.x += (dx / distance) * force * (prefersReducedMotion ? 0.42 : 1.2);
+          particle.y += (dy / distance) * force * (prefersReducedMotion ? 0.32 : 0.82);
+          particle.vx += (dx / distance) * force * (prefersReducedMotion ? 0.035 : 0.12);
+          particle.vy += (dy / distance) * force * (prefersReducedMotion ? 0.02 : 0.06);
         }
 
-        if (!reduceMotion) {
-          const drift = Math.sin(frame * 0.01 + particle.phase) * particle.drift * 0.28;
-          particle.x += particle.vx + drift;
-          particle.y += particle.vy;
-          particle.vx += (particle.baseVX - particle.vx) * 0.012;
-          particle.vy += (particle.baseVY - particle.vy) * 0.018;
-          particle.alpha += (particle.targetAlpha - particle.alpha) * 0.02;
-        }
+        const drift = Math.sin(frame * 0.01 + particle.phase) * particle.drift * 0.28 * motionScale;
+        particle.x += (particle.vx + drift) * motionScale;
+        particle.y += particle.vy * motionScale;
+        particle.vx += (particle.baseVX - particle.vx) * 0.012;
+        particle.vy += (particle.baseVY - particle.vy) * 0.018;
+        particle.alpha += (particle.targetAlpha - particle.alpha) * 0.02;
 
         if (particle.y > height + 28) {
           Object.assign(particle, createParticle(-28 - Math.random() * 90));

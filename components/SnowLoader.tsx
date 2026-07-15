@@ -24,7 +24,7 @@ export function SnowLoader() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (window.sessionStorage.getItem("snow-intro-seen") === "true" || reduceMotion) {
+    if (window.sessionStorage.getItem("snow-intro-seen") === "true") {
       return;
     }
 
@@ -51,15 +51,15 @@ export function SnowLoader() {
         size
       });
     });
-    const hold = window.innerWidth < 768 ? 820 : 1350;
+    const hold = reduceMotion ? 420 : window.innerWidth < 768 ? 820 : 1350;
     const dockTimer = window.setTimeout(() => {
       setState((current) => (current ? { ...current, docked: true } : current));
     }, hold);
     const endTimer = window.setTimeout(() => {
       window.sessionStorage.setItem("snow-intro-seen", "true");
       setState((current) => (current ? { ...current, visible: false } : current));
-    }, hold + (window.innerWidth < 768 ? 850 : 1050));
-    const removeTimer = window.setTimeout(() => setState(null), hold + 1500);
+    }, hold + (reduceMotion ? 520 : window.innerWidth < 768 ? 850 : 1050));
+    const removeTimer = window.setTimeout(() => setState(null), hold + (reduceMotion ? 900 : 1500));
 
     return () => {
       window.cancelAnimationFrame(showFrame);
@@ -92,23 +92,23 @@ export function SnowLoader() {
               scale: state.docked ? 0.43 : [1.08, 1.22, 1.08]
             }}
             transition={{
-              duration: state.docked ? 0.95 : 1.2,
+              duration: state.docked ? (reduceMotion ? 0.45 : 0.95) : reduceMotion ? 0.7 : 1.2,
               ease: [0.22, 1, 0.36, 1],
-              repeat: state.docked ? 0 : Infinity,
+              repeat: state.docked || reduceMotion ? 0 : Infinity,
               repeatType: "mirror"
             }}
           >
             <motion.div
               aria-hidden="true"
               className="absolute inset-[-42%] rounded-full border border-snow-lilac/20"
-              animate={{ rotate: 360, opacity: [0.28, 0.72, 0.28] }}
-              transition={{ duration: 4.8, repeat: Infinity, ease: "linear" }}
+              animate={{ rotate: 360, opacity: reduceMotion ? [0.42, 0.56, 0.42] : [0.28, 0.72, 0.28] }}
+              transition={{ duration: reduceMotion ? 8 : 4.8, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
               aria-hidden="true"
               className="absolute inset-[-18%] rounded-full bg-snow-lilac/20 blur-2xl"
-              animate={{ opacity: [0.32, 0.76, 0.32], scale: [0.9, 1.08, 0.9] }}
-              transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ opacity: reduceMotion ? [0.42, 0.58, 0.42] : [0.32, 0.76, 0.32], scale: reduceMotion ? [0.98, 1.02, 0.98] : [0.9, 1.08, 0.9] }}
+              transition={{ duration: reduceMotion ? 3.2 : 1.7, repeat: Infinity, ease: "easeInOut" }}
             />
             {[0, 1, 2, 3, 4, 5].map((dot) => (
               <motion.span
@@ -132,7 +132,7 @@ export function SnowLoader() {
             <motion.div
               className="relative grid h-full w-full place-items-center rounded-2xl border border-snow-border bg-white/[0.07] text-snow-lilac shadow-glow backdrop-blur-2xl"
               animate={{ rotate: 360 }}
-              transition={{ duration: 3.4, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: reduceMotion ? 8 : 3.4, repeat: Infinity, ease: "linear" }}
             >
               <Snowflake className="h-1/2 w-1/2" />
             </motion.div>

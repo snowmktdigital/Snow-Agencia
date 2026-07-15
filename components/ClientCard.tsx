@@ -119,7 +119,7 @@ export function ClientCard(props: ClientCardProps) {
       >
         <motion.article
           className="flex h-full flex-col"
-          whileHover={reduceMotion ? undefined : { scale: 1.045, y: -8 }}
+          whileHover={{ scale: reduceMotion ? 1.015 : 1.045, y: reduceMotion ? -3 : -8 }}
           whileTap={{ scale: 0.985 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -133,9 +133,9 @@ export function ClientCard(props: ClientCardProps) {
       >
         <motion.article
           className="glass-panel flex w-[min(31rem,calc(100vw-3rem))] flex-col overflow-hidden rounded-lg"
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.94, y: 18 }}
-          animate={reduceMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: reduceMotion ? 0.99 : 0.94, y: reduceMotion ? 6 : 18 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: reduceMotion ? 0.2 : 0.32, ease: [0.22, 1, 0.36, 1] }}
         >
           <ClientCardContent {...props} preview compact={false} />
         </motion.article>
