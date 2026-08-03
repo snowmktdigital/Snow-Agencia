@@ -83,10 +83,10 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={0.26} className="mt-7 flex max-w-xl flex-wrap gap-2 sm:mt-9 sm:gap-3">
-              {authorityPills.map((pill, index) => (
+              {authorityPills.map((pill) => (
                 <span
                   key={pill}
-                  className={`${index > 1 ? "hidden sm:inline-flex" : "inline-flex"} rounded-full border border-snow-border bg-white/[0.06] px-3 py-1.5 text-[0.72rem] font-semibold text-snow-muted backdrop-blur-xl sm:px-3.5 sm:py-2 sm:text-sm`}
+                  className="inline-flex rounded-full border border-snow-border bg-white/[0.06] px-2.5 py-1.5 text-[0.68rem] font-semibold text-snow-muted backdrop-blur-xl sm:px-3.5 sm:py-2 sm:text-sm"
                 >
                   {pill}
                 </span>
