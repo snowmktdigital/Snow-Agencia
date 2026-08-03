@@ -198,7 +198,7 @@ export const metrics = [
       "Pessoas impactadas por conteúdos, campanhas e ações de presença digital."
   },
   {
-    value: "+779",
+    value: "+1.000",
     label: "conteúdos produzidos",
     description:
       "Posts, criativos, vídeos e materiais estratégicos criados para marcas locais."
